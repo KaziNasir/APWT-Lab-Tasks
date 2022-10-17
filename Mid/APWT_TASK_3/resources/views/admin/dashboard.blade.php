@@ -28,7 +28,7 @@
                 <td>{{$user->id}}</td>
                 <td>{{$user->username}}</td>
                 <td>{{$user->email}}</td>
-                <td><a class="btn btn-warning" href="userEdit/{{$user->id}}">Edit</a></td>
+                <td><a class="btn btn-warning" href="/user/userEdit/{{$user->id}}">Edit</a></td>
                 <td><a class="btn btn-danger" href="userDelete/{{$user->id}}">Delete</a></td>
             </tr>
         @endforeach

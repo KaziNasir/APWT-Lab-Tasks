@@ -55,7 +55,7 @@ class PagesController extends Controller
             return redirect()->route('aDashboard');
         }
 
-        return redirect()->back()->with('message', 'Login failed. Incorrect username or password');
+        return view('login')->with('message', 'Login failed. Incorrect username or password');
     }
 
     public function logout(){

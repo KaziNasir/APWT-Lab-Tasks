@@ -97,8 +97,8 @@ class AdminController extends Controller
 
 
 public function userEdit(Request $request){
-    $user = User::where('id', $request->id->first());
-    return view('admin.userEdit')->with('user', $user) ;
+    $user = User::where('id', $request->id)->first();
+    return view('user.userEdit')->with('user', $user) ;
 }
 
 public function userEditSubmit(Request $request){
@@ -107,7 +107,7 @@ public function userEditSubmit(Request $request){
         'email'=>'required|email|unique:users,email',
     ],);
 
-    $user = User::where('id', $request->id->first());
+    $user = User::where('id', $request->id)->first();
     $user->username = $request->username;
     $user->email = $request->email;
     $user->save();
@@ -120,6 +120,6 @@ public function userDelete(Request $request){
     $user->delete();
 
     session()->put('message', 'Delete successful.');
-    return redirect('admin.aDashboard');
+    return redirect('admin/dashboard');
 }
 }

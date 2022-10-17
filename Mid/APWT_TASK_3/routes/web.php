@@ -41,7 +41,7 @@ Route::get('/admin/dashboard',[AdminController::class, 'aDashboard'])->name('aDa
 Route::get('/user/dashboard',[UserController::class, 'uDashboard'])->name('uDashboard')->middleware('ValidateLogin');
 Route::post('/user/dashboard',[UserController::class, 'uDashboardSubmit'])->name('uDashboardSubmit')->middleware('ValidateLogin');
 
-Route::get('/admin/userEdit',[AdminController::class, 'userEdit'])->name('userEdit')->middleware('ValidAdmin');
-Route::post('/admin/userEdit',[AdminController::class, 'userEditSubmit'])->name('userEditSubmit')->middleware('ValidAdmin');
+Route::get('/user/userEdit/{id}',[AdminController::class, 'userEdit'])->name('userEdit')->middleware('ValidAdmin');
+Route::post('/user/userEdit',[AdminController::class, 'userEditSubmit'])->name('userEditSubmit')->middleware('ValidAdmin');
 
-Route::get('/admin/userDelete',[AdminController::class, 'userDelete'])->name('userDelete')->middleware('ValidAdmin');
+Route::get('/admin/userDelete/{id}',[AdminController::class, 'userDelete'])->name('userDelete')->middleware('ValidAdmin');
