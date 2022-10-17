@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 <h2>Edit Student</h2>
-<form action="{{route('userEdit')}}" class="form-group" method="post">
+<form action="{{route('userEditSubmit')}}" class="form-group" method="post">
     <!-- Cross Site Request Forgery-->
     {{csrf_field()}}
 
@@ -16,7 +16,7 @@
     @endif
     <div class="col-md-4 form-group">
         <span>ID</span>
-        <input type="text" name="id" value="{{$user->id}}" class="form-control">
+        <input type="text" name="id" value="{{$user->id}}" class="form-control" hidden>
         @error('name')
             <span class="text-danger">{{$message}}</span>
         @enderror
@@ -24,7 +24,7 @@
 
     <div class="col-md-4 form-group">
         <span>Name</span>
-        <input type="text" name="name" value="{{$user->username}}" class="form-control">
+        <input type="text" name="username" value="{{$user->username}}" class="form-control">
         @error('name')
             <span class="text-danger">{{$message}}</span>
         @enderror
