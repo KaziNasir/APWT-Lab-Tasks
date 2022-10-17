@@ -2,7 +2,11 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\ServicesController;
+use App\Http\Middleware\ValidateLogin;
+use App\Http\Middleware\ValidAdmin;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +31,17 @@ Route::get('/ourTeams',[PagesController::class, 'ourTeams'])->name('ourTeams');
 
 Route::get('/login',[PagesController::class, 'login'])->name('login');
 Route::post('/login',[PagesController::class, 'loginSubmit'])->name('loginSubmit');
+Route::get('/logout',[PagesController::class, 'logout'])->name('logout');
 
 Route::get('/registration',[PagesController::class, 'register'])->name('register');
 Route::post('/registration',[PagesController::class, 'registerSubmit'])->name('registerSubmit');
+
+Route::get('/admin/dashboard',[AdminController::class, 'aDashboard'])->name('aDashboard')->middleware('ValidAdmin');
+
+Route::get('/user/dashboard',[UserController::class, 'uDashboard'])->name('uDashboard')->middleware('ValidateLogin');
+Route::post('/user/dashboard',[UserController::class, 'uDashboardSubmit'])->name('uDashboardSubmit')->middleware('ValidateLogin');
+
+Route::get('/admin/userEdit',[AdminController::class, 'userEdit'])->name('userEdit')->middleware('ValidAdmin');
+Route::post('/admin/userEdit',[AdminController::class, 'userEditSubmit'])->name('userEditSubmit')->middleware('ValidAdmin');
+
+Route::get('/admin/userDelete',[AdminController::class, 'userDelete'])->name('userDelete')->middleware('ValidAdmin');

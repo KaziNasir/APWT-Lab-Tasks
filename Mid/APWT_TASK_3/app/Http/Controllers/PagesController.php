@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -33,14 +34,33 @@ class PagesController extends Controller
             'username'=>'required|min:5',
             'password'=>'required',
         ],);
+
         $user = User::where('username',$request->username)
         ->where('password',$request->password)
         ->first();
 
         if($user){
-            return redirect()->back()->with('message', 'Login successful');
+            session()->put("type",'user');
+            session()->put("username",$request->username);
+            return redirect()->route('uDashboard');
         }
-        return $request;
+
+        $admin = Admin::where('username',$request->username)
+        ->where('password',$request->password)
+        ->first();
+
+        if($admin){
+            session()->put("type",'admin');
+            session()->put("username",$request->username);
+            return redirect()->route('aDashboard');
+        }
+
+        return redirect()->back()->with('message', 'Login failed. Incorrect username or password');
+    }
+
+    public function logout(){
+        session()->flush();
+        return redirect('/');
     }
 
     public function register(){
@@ -59,8 +79,8 @@ class PagesController extends Controller
         $user->password = $request->password;
         $user->email = $request->email;
         $user->save();
-
-        return $request;
+        session()->put('message', 'Registration successful. Please login to continue');
+        return view('login');
     }
 
 
