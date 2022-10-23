@@ -31,7 +31,7 @@ class PagesController extends Controller
 
     public function loginSubmit(Request $request){
         $this->validate($request, [
-            'username'=>'required|min:5',
+            'username'=>'required|min:4',
             'password'=>'required',
         ],);
 
@@ -42,6 +42,7 @@ class PagesController extends Controller
         if($user){
             session()->put("type",'user');
             session()->put("username",$request->username);
+            session()->put("user_id",$user->id);
             return redirect()->route('uDashboard');
         }
 
@@ -52,6 +53,7 @@ class PagesController extends Controller
         if($admin){
             session()->put("type",'admin');
             session()->put("username",$request->username);
+            session()->put("user_id",$admin->id);
             return redirect()->route('aDashboard');
         }
 
@@ -69,7 +71,7 @@ class PagesController extends Controller
 
     public function registerSubmit(Request $request){
         $validate = $request->validate([
-            'username'=>'required|min:5|max:20',
+            'username'=>'required|min:4|max:20',
             'email'=>'required|email|unique:users,email',
             'password'=>'required'
         ],);

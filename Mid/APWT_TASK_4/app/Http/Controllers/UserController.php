@@ -13,7 +13,7 @@ public function __construct(){
 
 
 public function uDashboard(){
-    $user = User::where('username', session()->get('username'))->first();
+    $user = User::where('id', session()->get('user_id'))->first();
     return view('user.dashboard')->with('user', $user) ;
 }
 
@@ -23,7 +23,7 @@ public function uDashboardSubmit(Request $request){
         'email'=>'required|email|unique:users,email',
     ],);
 
-    $user = User::where('username', session()->get('username'))->first();
+    $user = User::where('id', session()->get('user_id'))->first();
     $user->username = $request->username;
     $user->email = $request->email;
     $user->save();

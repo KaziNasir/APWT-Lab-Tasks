@@ -11,7 +11,9 @@
 <body>
     @section('content')
     <h2>Welcome user: {{session()->get('username')}}</h2>
-    <br><br>
+    <br>
+    <a class="btn btn-primary" href="{{route('myProducts')}}">My Products</a>
+    <br>
     <div class="field-md">
         <fieldset>
             <legend><div class="legend"><h2>User Profile</h2></div></legend>

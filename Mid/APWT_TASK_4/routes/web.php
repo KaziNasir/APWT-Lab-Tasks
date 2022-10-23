@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ServicesController;
 use App\Http\Middleware\ValidateLogin;
 use App\Http\Middleware\ValidAdmin;
@@ -46,3 +47,5 @@ Route::get('/user/userEdit',[UserController::class, 'userEdit'])->name('userEdit
 Route::post('/user/userEdit',[UserController::class, 'userEditSubmit'])->name('userEditSubmit')->middleware('ValidAdmin');
 
 Route::get('/admin/userDelete/{id}',[UserController::class, 'userDelete'])->name('userDelete')->middleware('ValidAdmin');
+
+Route::get('/product/product',[ProductController::class, 'myProducts'])->name('myProducts')->middleware('ValidateLogin');

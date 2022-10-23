@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use app\Models\Admin;
 
 class AdminSeeder extends Seeder
 {
@@ -13,6 +14,11 @@ class AdminSeeder extends Seeder
      */
     public function run()
     {
-        //
+        \App\Models\Admin::factory()->create([
+            'username' => 'admin',
+            'email' => 'admin@gmail.com',
+            'password' => '1234',
+
+        ]);
     }
 }
